@@ -113,15 +113,69 @@ I **automated** the entire workflow — from email to dashboard — using free t
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Run This Project
 
-1. Clone the repository.
-2. Set up Google Cloud API credentials.
-3. Replace the path to your JSON key in [Gdrive_to_powerbi.py](./Gdrive_to_powerbi.py).
-4. Replace your Google Drive **folder ID** in [Gdrive_to_powerbi.py](./Gdrive_to_powerbi.py).
-5. Run the Python script to fetch and combine data files.
-6. Open [Financial_Project.pbix](./Financial_Project.pbix) in **Power BI Desktop**.
-7. Refresh the dashboard to view the latest data.
+Follow these steps to set up and run the complete financial data automation and dashboard system:
+
+---
+
+### 📨 Step 1: Receive and Filter Emails in Outlook
+
+- Ensure all financial data files are sent to a **dedicated email inbox** (e.g., `finance@yourdomain.com`).
+- In **Outlook**, create a **rule** that:
+  - Filters emails based on subject keywords (e.g., “Daily Financial Report”).
+  - Saves attachments or moves these emails into a dedicated folder (e.g., “Finance Reports”).
+
+---
+
+### 🔁 Step 2: Automate File Transfer with Power Automate
+
+- Open [Power Automate](https://powerautomate.microsoft.com/).
+- Create a **new flow** that:
+  1. **Triggers** when a new email with attachments is received in the specified Outlook folder.
+  2. **Extracts attachments** from the email.
+  3. **Saves files to a Google Drive folder** (e.g., `/Finance-Reports/`).
+- Ensure the same folder is shared with your **Google Cloud service account** email (you’ll get this after creating the API key).
+
+---
+
+### ☁️ Step 3: Set Up Google Cloud API
+
+- Visit [Google Cloud Console](https://console.cloud.google.com/).
+- Create a project and enable the **Google Drive API**.
+- Create a **service account** and download the **JSON key**.
+- Share your Google Drive folder with the **service account email** (`xxx@project-id.iam.gserviceaccount.com`).
+
+---
+
+### 🐍 Step 4: Configure and Run Python Script
+
+- Open the [Gdrive_to_powerbi.py](./Gdrive_to_powerbi.py) script.
+- Replace the placeholders:
+  - `your-json-path.json` → path to your downloaded service account key.
+  - `folder_id` → your Google Drive folder ID.
+
+- Install required Python packages if not already:
+  ```bash
+  pip install pandas google-api-python-client google-auth
+  ```
+
+- Run the script:
+  ```bash
+  python Gdrive_to_powerbi.py
+  ```
+
+---
+
+### 📊 Step 5: Open and Refresh Power BI Dashboard
+
+- Launch **Power BI Desktop**.
+- Open [Financial_Project.pbix](./Financial_Project.pbix).
+- Click **Refresh** to update all visuals and data models with the newly combined dataset.
+
+---
+
+This pipeline allows you to go from **email attachments → Google Drive → cleaned dataset → Power BI dashboard**, all automated and seamless
 
 ---
 
